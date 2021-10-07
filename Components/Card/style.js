@@ -7,10 +7,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     zIndex: 1,
     borderRadius: 6,
-    position: 'absolute',
+    overflow: 'hidden',
   },
   wrapper: {
-    top: -110,
     shadowColor: '#181A6F',
     shadowOffset: {
       width: 0,
@@ -23,18 +22,16 @@ const styles = StyleSheet.create({
   money: {
     width: '80%',
     alignSelf: 'center',
-    position: 'absolute',
-    top: -55,
     color: 'white',
     fontWeight: '600',
     fontSize: 25,
+    marginBottom: 10,
   },
   avb: {
     width: '80%',
     alignSelf: 'center',
-    position: 'absolute',
-    top: -79,
     color: 'white',
+    marginBottom: 10,
   },
   inCard: {
     paddingHorizontal: 20,
@@ -45,8 +42,29 @@ const styles = StyleSheet.create({
   },
   carNumber: {
     color: 'white',
-    width: '100%',
-    fontSize: 16,
+    fontSize: 14,
+    letterSpacing: 3,
+  },
+  dot: {color: 'white', fontSize: 30, letterSpacing: 3},
+  circle: {
+    backgroundColor: 'white',
+    width: 190,
+    height: 190,
+    borderRadius: 100,
+    position: 'absolute',
+    bottom: -70,
+    right: -55,
+    opacity: 0.05,
+  },
+  circletwo: {
+    backgroundColor: 'white',
+    width: 190,
+    height: 190,
+    borderRadius: 100,
+    position: 'absolute',
+    top: -90,
+    right: -70,
+    opacity: 0.05,
   },
 });
 

@@ -8,7 +8,7 @@ import styles from './style';
 // create a component
 const Card = () => {
   return (
-    <View>
+    <View style={{zIndex: 22}}>
       <View style={styles.wrapper}>
         <Text style={styles.avb}>Available Money</Text>
         <Text style={styles.money}>$ 18,981.50</Text>
@@ -25,18 +25,10 @@ const Card = () => {
                 justifyContent: 'space-between',
                 alignItems: 'baseline',
               }}>
-              <Text style={{color: 'white', fontSize: 14, letterSpacing: 3}}>
-                1234
-              </Text>
-              <Text style={{color: 'white', fontSize: 30, letterSpacing: 3}}>
-                ....
-              </Text>
-              <Text style={{color: 'white', fontSize: 30, letterSpacing: 3}}>
-                ....
-              </Text>
-              <Text style={{color: 'white', fontSize: 14, letterSpacing: 3}}>
-                5689
-              </Text>
+              <Text style={styles.carNumber}>1234</Text>
+              <Text style={styles.dot}>....</Text>
+              <Text style={styles.dot}>....</Text>
+              <Text style={styles.carNumber}>5689</Text>
             </View>
             <View
               style={{
@@ -48,6 +40,8 @@ const Card = () => {
               <Text style={{color: 'white'}}>08/22</Text>
             </View>
           </View>
+          <View style={styles.circle} />
+          <View style={styles.circletwo} />
         </LinearGradient>
       </View>
     </View>

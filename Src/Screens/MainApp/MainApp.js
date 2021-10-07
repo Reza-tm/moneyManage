@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
@@ -42,7 +42,10 @@ const monthRender = c => (
   </View>
 );
 
+const changeCard = () => {};
+
 const MainApp = () => {
+  const [cardIndex, setCardIndex] = useState(0);
   return (
     <View style={styles.container}>
       <View style={styles.topSections}>
@@ -54,29 +57,25 @@ const MainApp = () => {
             itemWidth={400}
             layout={'stack'}
             layoutCardOffset={290}
+            onSnapToItem={e => changeCard(e)}
           />
         </View>
       </View>
       <View style={styles.botSections}>
         <View style={{width: '100%', paddingHorizontal: 20}}>
-          <Text style={{fontWeight: '600', fontSize: 20}}>This month</Text>
-          <FlatList
-            style={{
-              marginTop: 10,
-            }}
-            data={data}
-            renderItem={monthRender}
-            horizontal
-          />
+          <Text style={[styles.transText]}>This month</Text>
+          <FlatList data={data} renderItem={monthRender} horizontal />
           <View
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
               marginTop: 30,
             }}>
-            <Text>Transactions</Text>
+            <Text style={[styles.transText]}>Transactions</Text>
           </View>
-          <FlatList data={data} renderItem={Transactions} />
+          <View>
+            <FlatList data={data} renderItem={Transactions} />
+          </View>
         </View>
       </View>
     </View>

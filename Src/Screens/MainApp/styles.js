@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    backgroundColor: 'white',
+    backgroundColor: '#F8F9FD',
   },
   topSections: {
     height: '30%',
@@ -13,11 +13,17 @@ const styles = StyleSheet.create({
   },
   botSections: {
     bottom: 0,
-    height: '60%',
-    backgroundColor: 'white',
+    height: '55%',
+    backgroundColor: '#F8F9FD',
     zIndex: -1,
     width: '100%',
     position: 'absolute',
+  },
+  transText: {
+    fontWeight: '600',
+    fontSize: 20,
+    marginBottom: 15,
+    color: '#042C5C',
   },
 });
 

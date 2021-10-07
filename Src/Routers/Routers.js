@@ -18,8 +18,8 @@ const Routers = () => {
       ) : (
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen name="Sign In" component={SingIn} />
             <Stack.Screen name="Sign Up" component={SignUp} />
+            <Stack.Screen name="Sign In" component={SingIn} />
           </Stack.Navigator>
         </NavigationContainer>
       )}

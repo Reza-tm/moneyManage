@@ -12,7 +12,9 @@ const UserPassProvider = ({children}) => {
   const getPrevUserPassess = async () => {
     const getData = await AsyncStorage.getItem('signUpedUsers');
     const parsed = JSON.parse(getData);
-    setUserPass(parsed);
+    if (parsed) {
+      setUserPass(parsed);
+    }
   };
 
   const [userPass, setUserPass] = useState([]);

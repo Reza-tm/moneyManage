@@ -4,6 +4,7 @@ import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import {useUserPass} from '../../Provider/UserPassProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './style';
+import Icon from 'react-native-vector-icons/dist/Ionicons';
 
 const SignUp = ({navigation}) => {
   const [prevUserPasses, setUserPass] = useUserPass();

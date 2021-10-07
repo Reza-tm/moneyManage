@@ -145,7 +145,6 @@
 				9E3AB87AAC85443577631AF3 /* Pods-moneyManage-moneyManageTests.debug.xcconfig */,
 				F96E62BF7ECFC8597FADFDBF /* Pods-moneyManage-moneyManageTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

@@ -1,12 +1,21 @@
 //import liraries
-import React, {Component, useContext, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, {Component, useContext, useEffect, useState} from 'react';
 import {createContext} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
 const AppUserPasses = createContext();
-
 const UserPassProvider = ({children}) => {
-  const [userPass, setUserPass] = useState('');
+  useEffect(() => {
+    getPrevUserPassess();
+  }, []);
+  const getPrevUserPassess = async () => {
+    const getData = await AsyncStorage.getItem('signUpedUsers');
+    const parsed = JSON.parse(getData);
+    setUserPass(parsed);
+  };
+
+  const [userPass, setUserPass] = useState([]);
   return (
     <AppUserPasses.Provider value={[userPass, setUserPass]}>
       {children}

@@ -1,21 +1,27 @@
 //import liraries
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+import {useUserPass} from '../../Provider/UserPassProvider';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import styles from './style';
 
-const submit = (first, second) => {};
-
-const SignUp = () => {
+const SignUp = ({navigation}) => {
+  const [prevUserPasses, setUserPass] = useUserPass();
   const [newMail, setNewMail] = useState('');
   const [newPass, setNewPass] = useState('');
+
+  const submit = (mail, pass) => {
+    prevUserPasses.push({mail, pass});
+    storeData(prevUserPasses);
+  };
+  const storeData = async value => {
+    const stringValue = JSON.stringify(value);
+    await AsyncStorage.setItem('signUpedUsers', stringValue);
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Sing In please</Text>
+      <Text>Sing up please</Text>
       <TextInput
         value={newMail}
         onChangeText={setNewMail}
@@ -28,34 +34,15 @@ const SignUp = () => {
         placeholder="new Pass"
         style={styles.textInput}
       />
+
       <TouchableOpacity onPress={() => submit(newMail, newPass)}>
         <Text style={styles.submit}>Submit</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Sign In')}>
+        <Text style={styles.submit}>Sign In</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-// define your styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#2c3e50',
-  },
-  textInput: {
-    backgroundColor: '#aeaeae',
-    width: 200,
-    height: 50,
-    marginTop: 20,
-    paddingHorizontal: 7,
-  },
-  submit: {
-    marginTop: 20,
-    color: 'white',
-    fontSize: 20,
-  },
-});
-
-//make this component available to the app
 export default SignUp;

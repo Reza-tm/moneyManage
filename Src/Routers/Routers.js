@@ -4,8 +4,9 @@ import {View, Text, StyleSheet} from 'react-native';
 import Splash from '../Screens/Splash/Splash';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import SingIn from '../Screens/Sign In/SignIn';
-import SignUp from '../Screens/Sign Up/SignUp';
+// import SingIn from '../Screens/Sign In/SignIn';
+// import SignUp from '../Screens/Sign Up/SignUp';
+import MainApp from '../Screens/MainApp/MainApp';
 
 // create a component
 const Stack = createNativeStackNavigator();
@@ -16,12 +17,14 @@ const Routers = () => {
       {splash ? (
         <Splash setSplash={setSplash} />
       ) : (
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name="Sign Up" component={SignUp} />
-            <Stack.Screen name="Sign In" component={SingIn} />
-          </Stack.Navigator>
-        </NavigationContainer>
+        // I will uncomment this after some change
+        // <NavigationContainer>
+        //   <Stack.Navigator>
+        //     <Stack.Screen name="Sign Up" component={SignUp} />
+        //     <Stack.Screen name="Sign In" component={SingIn} />
+        //   </Stack.Navigator>
+        // </NavigationContainer>
+        <MainApp />
       )}
     </View>
   );

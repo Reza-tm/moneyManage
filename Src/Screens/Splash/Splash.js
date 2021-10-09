@@ -1,18 +1,27 @@
-import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useRef} from 'react';
+import {View, Text, StyleSheet, Animated} from 'react-native';
 import LottieView from 'lottie-react-native';
 
 // create a component
 const Splash = ({setSplash}) => {
+  const opacity = useRef(new Animated.Value(1)).current;
+  const splashEnd = async () => {
+    Animated.spring(opacity, {
+      toValue: 0,
+      useNativeDriver: true,
+    }).start();
+    setTimeout(() => setSplash(false), 300);
+  };
+
   return (
-    <View style={styles.container}>
+    <Animated.View style={[styles.container, {opacity: opacity}]}>
       <LottieView
         autoPlay
         loop={false}
-        onAnimationFinish={() => setSplash(false)}
+        onAnimationFinish={() => splashEnd()}
         source={require('../../../assets/lottie/13398-money-stack.json')}
       />
-    </View>
+    </Animated.View>
   );
 };
 

@@ -52,9 +52,9 @@ const styles = StyleSheet.create({
     height: 190,
     borderRadius: 100,
     position: 'absolute',
-    bottom: -70,
-    right: -55,
-    opacity: 0.05,
+    top: 70,
+    left: 185,
+    opacity: 0.09,
   },
   circletwo: {
     backgroundColor: 'white',
@@ -63,8 +63,8 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     position: 'absolute',
     top: -90,
-    right: -70,
-    opacity: 0.05,
+    left: 200,
+    opacity: 0.09,
   },
 });
 

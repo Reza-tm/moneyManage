@@ -1,24 +1,18 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import LinearGradient from 'react-native-linear-gradient';
+import React, {useEffect, useRef, useState} from 'react';
+import {View, Text, StyleSheet, FlatList, Animated} from 'react-native';
 import styles from './styles';
 import Card from '../../../Components/Card/Card';
 import Carousel from 'react-native-snap-carousel';
 import {Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Transactions from '../../../Components/Transactions/Transactions';
+import * as Animatable from 'react-native-animatable';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const data = ['ali', 'reza', 'saamad'];
 
-const renderItem = ({card}) => (
-  <View style={{marginTop: 60}}>
-    <Card />
-  </View>
-);
 const monthRender = c => (
   <View style={{width: windowWidth / 2, flexDirection: 'row'}}>
     <View
@@ -42,13 +36,51 @@ const monthRender = c => (
   </View>
 );
 
-const changeCard = () => {};
+const theme = [{topBG: '#181A6F'}, {topBG: 'red'}, {topBG: 'green'}];
 
 const MainApp = () => {
-  const [cardIndex, setCardIndex] = useState(0);
+  const topBgcIndex = useRef(new Animated.Value(0)).current;
+  const rGradient = useRef(new Animated.Value(0)).current;
+  const lGradient = useRef(new Animated.Value(0)).current;
+
+  const interPolatedBgc = topBgcIndex.interpolate({
+    inputRange: [0, 1, 2],
+    outputRange: [
+      'rgba(44, 62, 80, 1)',
+      'rgba(142, 158, 171, 1)',
+      'rgba(255, 107, 107, 1)',
+    ],
+  });
+
+  const cardColor = topBgcIndex.interpolate({
+    inputRange: [0, 1, 2],
+    outputRange: [
+      'rgba(52, 152, 219, 1)',
+      'rgba(41, 50, 60, 1)',
+      'rgba(85, 98, 112, 1)',
+    ],
+  });
+
+  const changeCard = index => {
+    Animated.sequence([
+      Animated.spring(topBgcIndex, {
+        toValue: index,
+      }),
+      Animated.spring(rGradient, {
+        toValue: index,
+      }),
+    ]).start();
+  };
+
+  const renderItem = ({card}) => (
+    <View style={{marginTop: 60}}>
+      <Card bgc={cardColor} />
+    </View>
+  );
   return (
-    <View style={styles.container}>
-      <View style={styles.topSections}>
+    <Animatable.View style={styles.container} delay={500} animation="fadeIn">
+      <Animated.View
+        style={[styles.topSections, {backgroundColor: interPolatedBgc}]}>
         <View style={{position: 'absolute', height: 338}}>
           <Carousel
             data={data}
@@ -60,25 +92,34 @@ const MainApp = () => {
             onSnapToItem={e => changeCard(e)}
           />
         </View>
-      </View>
+      </Animated.View>
       <View style={styles.botSections}>
         <View style={{width: '100%', paddingHorizontal: 20}}>
-          <Text style={[styles.transText]}>This month</Text>
-          <FlatList data={data} renderItem={monthRender} horizontal />
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginTop: 30,
-            }}>
-            <Text style={[styles.transText]}>Transactions</Text>
-          </View>
-          <View>
-            <FlatList data={data} renderItem={Transactions} />
-          </View>
+          <Animatable.View animation="fadeIn" delay={1000}>
+            <Text style={[styles.transText]}>This month</Text>
+            <FlatList
+              data={data}
+              renderItem={monthRender}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
+          </Animatable.View>
+          <Animatable.View animation="fadeIn" delay={1500}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginTop: 30,
+              }}>
+              <Text style={[styles.transText]}>Transactions</Text>
+            </View>
+            <View>
+              <FlatList data={data} renderItem={Transactions} />
+            </View>
+          </Animatable.View>
         </View>
       </View>
-    </View>
+    </Animatable.View>
   );
 };
 

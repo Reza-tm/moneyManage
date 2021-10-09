@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
   },
   topSections: {
     height: '30%',
-    backgroundColor: '#181A6F',
     position: 'relative',
     zIndex: 1,
   },

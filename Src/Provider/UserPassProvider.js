@@ -1,6 +1,6 @@
 //import liraries
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, {Component, useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {createContext} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
